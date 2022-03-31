@@ -1,14 +1,14 @@
-var Student = (function () {
-    function Student(firstName, middleInitial, lastName) {
-        this.firstName = firstName;
-        this.middleInitial = middleInitial;
-        this.lastName = lastName;
-        this.fullName = firstName + " " + middleInitial + " " + lastName;
-    }
-    return Student;
-}());
-function greeter(person) {
-    return "Hello, " + person.firstName + " " + person.lastName;
-}
-var user = new Student("Jane", "M.", "User");
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Player_1 = require("./classes/Player");
+window.addEventListener('load', function () {
+    var loading = document.getElementById('loading');
+    loading.style.display = 'none';
+    var canvas = document.getElementById('canvas1');
+    var ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var player = new Player_1.default(canvas.width, canvas.height);
+    player.draw(ctx);
+});
 console.log('hell yes');
