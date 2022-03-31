@@ -1,3 +1,4 @@
+import InputHandler from './classes/InputHandler.js'
 import Player from './classes/Player.js'
 
 window.addEventListener('load', () => {
@@ -8,8 +9,25 @@ window.addEventListener('load', () => {
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
 
+  const inputHandler = new InputHandler()
+  console.log(inputHandler.getLastKey())
   const player = new Player(canvas.width, canvas.height)
-  player.draw(ctx)
+
+  let lastTime: number = 0
+  function animateLoop (timeStamp: number) {
+    const deltaTime = timeStamp - lastTime
+    console.log(inputHandler.getLastKey(), timeStamp)
+
+    // clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    // draw next frame
+    player.update(inputHandler.getLastKey())
+    player.draw(ctx, deltaTime)
+
+    requestAnimationFrame(animateLoop)
+  }
+  animateLoop(0)
 })
 
 console.log('hell yes')
