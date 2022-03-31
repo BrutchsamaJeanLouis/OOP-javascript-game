@@ -1,4 +1,4 @@
-import Player from './classes/Player'
+import Player from './classes/Player.js'
 
 window.addEventListener('load', () => {
   const loading : HTMLElement = document.getElementById('loading')

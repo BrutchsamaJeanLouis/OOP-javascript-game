@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Player_1 = require("./classes/Player");
+import Player from './classes/Player.js';
 window.addEventListener('load', function () {
     var loading = document.getElementById('loading');
     loading.style.display = 'none';
@@ -8,7 +6,8 @@ window.addEventListener('load', function () {
     var ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    var player = new Player_1.default(canvas.width, canvas.height);
+    var player = new Player(canvas.width, canvas.height);
     player.draw(ctx);
 });
 console.log('hell yes');
+//# sourceMappingURL=main.js.map
