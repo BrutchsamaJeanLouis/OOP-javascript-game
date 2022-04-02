@@ -14,6 +14,7 @@ export default class Player {
   private image
   private spriteIndex: number
   private width: number
+  private hitBox: number
   private height: number
   private posX: number
   private poxY: number
@@ -28,6 +29,7 @@ export default class Player {
     this.spriteIndex = 1
     this.image = document.getElementById(`dinoRunRight-${this.spriteIndex}`)
     this.width = 200
+    this.hitBox = this.width / 1.5 // png image has extra padded area
     this.height = 150
     this.posX = 0
     this.poxY = 0
@@ -43,10 +45,18 @@ export default class Player {
 
   public update (inputLastKey: string) {
     if (inputLastKey === KeyConstants.pressRight) {
+      if (this.posX > this.gameWidth - this.hitBox) return
       this.runRight()
     }
     if (inputLastKey === KeyConstants.pressLeft) {
+      if (this.posX === 0) return // avoid running off screen
       this.runLeft()
+    }
+    if (inputLastKey === KeyConstants.releaseLeft) {
+      this.idleStandLeft()
+    }
+    if (inputLastKey === KeyConstants.releaseRight) {
+      this.idleStandRight()
     }
   }
 
@@ -75,5 +85,15 @@ export default class Player {
       this.image = document.getElementById(`dinoRunLeft-${this.spriteIndex}`)
       this.spriteIndex++
     }
+  }
+
+  private idleStandLeft () {
+    this.spriteIndex = 1
+    this.image = document.getElementById(`dinoRunLeft-${this.spriteIndex}`)
+  }
+
+  private idleStandRight () {
+    this.spriteIndex = 1
+    this.image = document.getElementById(`dinoRunRight-${this.spriteIndex}`)
   }
 }

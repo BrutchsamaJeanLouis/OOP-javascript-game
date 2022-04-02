@@ -12,6 +12,7 @@ var Player = (function () {
         this.spriteIndex = 1;
         this.image = document.getElementById("dinoRunRight-".concat(this.spriteIndex));
         this.width = 200;
+        this.hitBox = this.width / 1.5;
         this.height = 150;
         this.posX = 0;
         this.poxY = 0;
@@ -25,10 +26,20 @@ var Player = (function () {
     };
     Player.prototype.update = function (inputLastKey) {
         if (inputLastKey === KeyConstants.pressRight) {
+            if (this.posX > this.gameWidth - this.hitBox)
+                return;
             this.runRight();
         }
         if (inputLastKey === KeyConstants.pressLeft) {
+            if (this.posX === 0)
+                return;
             this.runLeft();
+        }
+        if (inputLastKey === KeyConstants.releaseLeft) {
+            this.idleStandLeft();
+        }
+        if (inputLastKey === KeyConstants.releaseRight) {
+            this.idleStandRight();
         }
     };
     Player.prototype.runRight = function () {
@@ -50,6 +61,14 @@ var Player = (function () {
             this.image = document.getElementById("dinoRunLeft-".concat(this.spriteIndex));
             this.spriteIndex++;
         }
+    };
+    Player.prototype.idleStandLeft = function () {
+        this.spriteIndex = 1;
+        this.image = document.getElementById("dinoRunLeft-".concat(this.spriteIndex));
+    };
+    Player.prototype.idleStandRight = function () {
+        this.spriteIndex = 1;
+        this.image = document.getElementById("dinoRunRight-".concat(this.spriteIndex));
     };
     return Player;
 }());

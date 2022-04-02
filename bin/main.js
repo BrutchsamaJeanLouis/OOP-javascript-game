@@ -10,13 +10,22 @@ window.addEventListener('load', function () {
     var inputHandler = new InputHandler();
     console.log(inputHandler.getLastKey());
     var player = new Player(canvas.width, canvas.height);
+    var famesPerSecond = 30;
+    var frameTick = 0;
     var lastTime = 0;
     function animateLoop(timeStamp) {
         var deltaTime = timeStamp - lastTime;
+        lastTime = deltaTime;
+        if (frameTick > 1000 / famesPerSecond) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            player.update(inputHandler.getLastKey());
+            player.draw(ctx, deltaTime);
+            frameTick = 0;
+        }
+        else {
+            frameTick += deltaTime;
+        }
         console.log(inputHandler.getLastKey(), timeStamp);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        player.update(inputHandler.getLastKey());
-        player.draw(ctx, deltaTime);
         requestAnimationFrame(animateLoop);
     }
     animateLoop(0);
