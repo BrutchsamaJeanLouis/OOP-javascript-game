@@ -6,8 +6,10 @@ window.addEventListener('load', () => {
   loading.style.display = 'none'
   const canvas : HTMLCanvasElement = <HTMLCanvasElement> document.getElementById('canvas1')
   const ctx = canvas.getContext('2d')
+  // ctx.imageSmoothingEnabled = false
   canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
+  // canvas.height = 720 // window.innerHeight
+  canvas.height = canvas.width / 2.031
 
   const inputHandler = new InputHandler()
   console.log(inputHandler.getLastKey())
@@ -33,7 +35,7 @@ window.addEventListener('load', () => {
       // do not render - too soon to redraw frame
       frameTick += deltaTime
     }
-    console.log(inputHandler.getLastKey(), timeStamp)
+    // console.log(inputHandler.getLastKey(), timeStamp)
 
     // clear canvas
     // ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -47,4 +49,8 @@ window.addEventListener('load', () => {
   animateLoop(0)
 })
 
-console.log('hell yes')
+// Scale game width/ game height with aspect ratio
+window.addEventListener('resize', () => {
+  const canvas : HTMLCanvasElement = <HTMLCanvasElement> document.getElementById('canvas1')
+  canvas.height = canvas.width / 2.031
+})

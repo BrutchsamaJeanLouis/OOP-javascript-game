@@ -6,7 +6,7 @@ window.addEventListener('load', function () {
     var canvas = document.getElementById('canvas1');
     var ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = canvas.width / 2.031;
     var inputHandler = new InputHandler();
     console.log(inputHandler.getLastKey());
     var player = new Player(canvas.width, canvas.height);
@@ -25,10 +25,12 @@ window.addEventListener('load', function () {
         else {
             frameTick += deltaTime;
         }
-        console.log(inputHandler.getLastKey(), timeStamp);
         requestAnimationFrame(animateLoop);
     }
     animateLoop(0);
 });
-console.log('hell yes');
+window.addEventListener('resize', function () {
+    var canvas = document.getElementById('canvas1');
+    canvas.height = canvas.width / 2.031;
+});
 //# sourceMappingURL=main.js.map
