@@ -1,5 +1,6 @@
 import InputHandler from './classes/InputHandler.js';
 import Player from './classes/Player.js';
+import Background from './classes/Background.js';
 window.addEventListener('load', function () {
     var loading = document.getElementById('loading');
     loading.style.display = 'none';
@@ -10,6 +11,7 @@ window.addEventListener('load', function () {
     var inputHandler = new InputHandler();
     console.log(inputHandler.getLastKey());
     var player = new Player(canvas.width, canvas.height);
+    var background = new Background(canvas.width, canvas.height, canvas.width, canvas.height, player, 1);
     var famesPerSecond = 30;
     var frameTick = 0;
     var lastTime = 0;
@@ -18,6 +20,8 @@ window.addEventListener('load', function () {
         lastTime = deltaTime;
         if (frameTick > 1000 / famesPerSecond) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            background.update();
+            background.draw(ctx);
             player.update(inputHandler.getLastKey());
             player.draw(ctx, deltaTime);
             frameTick = 0;
@@ -30,7 +34,5 @@ window.addEventListener('load', function () {
     animateLoop(0);
 });
 window.addEventListener('resize', function () {
-    var canvas = document.getElementById('canvas1');
-    canvas.height = canvas.width / 2.031;
 });
 //# sourceMappingURL=main.js.map

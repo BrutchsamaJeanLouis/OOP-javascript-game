@@ -1,16 +1,12 @@
 import { KeyConstants } from '../utils/KeyConstants.js'
+import { StateConstants } from '../utils/StateConstants.js'
 import InputHandler from './InputHandler.js'
-
-const states = {
-  STANDING_LEFT: 0,
-  STANDING_RIGHT: 1
-}
 export default class Player {
   // Attributes
   private gameWidth: number
   private gameHeight: number
   private states: []
-  private currentState: any[]
+  private currentState: string
   private image
   private spriteIndex: number
   private width: number
@@ -25,7 +21,7 @@ export default class Player {
     this.gameWidth = gameWidth
     this.gameHeight = gameHeight
     this.states = []
-    this.currentState = []
+    this.currentState = StateConstants.player.STANDING_RIGHT
     this.spriteIndex = 1
     this.image = document.getElementById(`dinoRunRight-${this.spriteIndex}`)
     this.width = 0.6 * Math.floor(gameWidth / 2) // 200
@@ -37,9 +33,13 @@ export default class Player {
     this.maxSpeed = 10
   }
 
+  public getState () {
+    return this.currentState
+  }
+
   public draw (canvasContext: CanvasRenderingContext2D, deltaTime: number) {
     canvasContext.drawImage(this.image, this.posX, this.poxY, this.width, this.height)
-    console.log(this.width, this.height)
+    // console.log(this.width, this.height)
     canvasContext.restore()
     // console.log(this.posX)
   }
@@ -62,6 +62,8 @@ export default class Player {
   }
 
   private runRight () {
+    // change state
+    this.currentState = StateConstants.player.RUNNING_RIGHT
     // move
     this.posX += this.speed
 
@@ -76,6 +78,10 @@ export default class Player {
   }
 
   private runLeft () {
+    // change state
+    this.currentState = StateConstants.player.RUNNING_LEFT
+
+    // move
     this.posX -= this.speed
 
     // animate
@@ -89,11 +95,15 @@ export default class Player {
   }
 
   private idleStandLeft () {
+    // change state
+    this.currentState = this.currentState = StateConstants.player.STANDING_LEFT
     this.spriteIndex = 1
     this.image = document.getElementById(`dinoRunLeft-${this.spriteIndex}`)
   }
 
   private idleStandRight () {
+    // change state
+    this.currentState = this.currentState = StateConstants.player.STANDING_RIGHT
     this.spriteIndex = 1
     this.image = document.getElementById(`dinoRunRight-${this.spriteIndex}`)
   }

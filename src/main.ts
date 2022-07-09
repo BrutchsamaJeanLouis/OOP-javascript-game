@@ -1,5 +1,6 @@
 import InputHandler from './classes/InputHandler.js'
 import Player from './classes/Player.js'
+import Background from './classes/Background.js'
 
 window.addEventListener('load', () => {
   const loading : HTMLElement = document.getElementById('loading')
@@ -14,6 +15,7 @@ window.addEventListener('load', () => {
   const inputHandler = new InputHandler()
   console.log(inputHandler.getLastKey())
   const player = new Player(canvas.width, canvas.height)
+  const background = new Background(canvas.width, canvas.height, canvas.width, canvas.height, player, 1)
 
   const famesPerSecond = 30
   let frameTick = 0
@@ -24,7 +26,9 @@ window.addEventListener('load', () => {
     if (frameTick > 1000 / famesPerSecond) {
       // clear canvas & draw next frame
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-
+      // render background update
+      background.update()
+      background.draw(ctx)
       // render player State
       player.update(inputHandler.getLastKey())
       player.draw(ctx, deltaTime)
@@ -51,6 +55,6 @@ window.addEventListener('load', () => {
 
 // Scale game width/ game height with aspect ratio
 window.addEventListener('resize', () => {
-  const canvas : HTMLCanvasElement = <HTMLCanvasElement> document.getElementById('canvas1')
-  canvas.height = canvas.width / 2.031
+  // const canvas : HTMLCanvasElement = <HTMLCanvasElement> document.getElementById('canvas1')
+  // canvas.height = canvas.width / 2.031
 })

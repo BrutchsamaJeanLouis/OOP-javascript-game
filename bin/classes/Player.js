@@ -1,14 +1,11 @@
 import { KeyConstants } from '../utils/KeyConstants.js';
-var states = {
-    STANDING_LEFT: 0,
-    STANDING_RIGHT: 1
-};
+import { StateConstants } from '../utils/StateConstants.js';
 var Player = (function () {
     function Player(gameWidth, gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         this.states = [];
-        this.currentState = [];
+        this.currentState = StateConstants.player.STANDING_RIGHT;
         this.spriteIndex = 1;
         this.image = document.getElementById("dinoRunRight-".concat(this.spriteIndex));
         this.width = 0.6 * Math.floor(gameWidth / 2);
@@ -19,9 +16,11 @@ var Player = (function () {
         this.speed = 0.05 * gameWidth / 2;
         this.maxSpeed = 10;
     }
+    Player.prototype.getState = function () {
+        return this.currentState;
+    };
     Player.prototype.draw = function (canvasContext, deltaTime) {
         canvasContext.drawImage(this.image, this.posX, this.poxY, this.width, this.height);
-        console.log(this.width, this.height);
         canvasContext.restore();
     };
     Player.prototype.update = function (inputLastKey) {
@@ -43,6 +42,7 @@ var Player = (function () {
         }
     };
     Player.prototype.runRight = function () {
+        this.currentState = StateConstants.player.RUNNING_RIGHT;
         this.posX += this.speed;
         if (this.spriteIndex === 8) {
             this.spriteIndex = 1;
@@ -53,6 +53,7 @@ var Player = (function () {
         }
     };
     Player.prototype.runLeft = function () {
+        this.currentState = StateConstants.player.RUNNING_LEFT;
         this.posX -= this.speed;
         if (this.spriteIndex === 8) {
             this.spriteIndex = 1;
@@ -63,10 +64,12 @@ var Player = (function () {
         }
     };
     Player.prototype.idleStandLeft = function () {
+        this.currentState = this.currentState = StateConstants.player.STANDING_LEFT;
         this.spriteIndex = 1;
         this.image = document.getElementById("dinoRunLeft-".concat(this.spriteIndex));
     };
     Player.prototype.idleStandRight = function () {
+        this.currentState = this.currentState = StateConstants.player.STANDING_RIGHT;
         this.spriteIndex = 1;
         this.image = document.getElementById("dinoRunRight-".concat(this.spriteIndex));
     };
