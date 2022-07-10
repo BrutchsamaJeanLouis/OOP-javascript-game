@@ -11,6 +11,9 @@ var InputHandler = (function () {
                 case 'ArrowRight':
                     _this.lastKey = KeyConstants.pressRight;
                     break;
+                case 'ArrowUp':
+                    _this.lastKey = KeyConstants.pressUp;
+                    break;
             }
         });
         window.addEventListener('keyup', function (e) {
@@ -20,6 +23,10 @@ var InputHandler = (function () {
                     break;
                 case 'ArrowRight':
                     _this.lastKey = KeyConstants.releaseRight;
+                    break;
+                case 'ArrowUp':
+                    _this.lastKey = KeyConstants.releaseUp;
+                    break;
             }
         });
     }
