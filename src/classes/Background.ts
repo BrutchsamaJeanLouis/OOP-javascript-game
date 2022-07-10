@@ -1,5 +1,5 @@
-import Player from "./Player.js"
-import { StateConstants } from "../utils/StateConstants.js"
+import Player from './Player.js'
+import { StateConstants } from '../utils/StateConstants.js'
 
 export default class Layer {
   game: any

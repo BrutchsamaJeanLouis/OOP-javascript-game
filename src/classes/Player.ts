@@ -1,6 +1,5 @@
 import { KeyConstants } from '../utils/KeyConstants.js'
 import { StateConstants } from '../utils/StateConstants.js'
-import InputHandler from './InputHandler.js'
 export default class Player {
   // Attributes
   private gameWidth: number
