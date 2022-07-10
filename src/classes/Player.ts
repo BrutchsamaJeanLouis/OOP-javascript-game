@@ -27,7 +27,7 @@ export default class Player {
     this.width = 0.6 * Math.floor(gameWidth / 2) // 200
     this.height = 0.8 * Math.floor(gameHeight / 2) // 150
     this.hitBoxXaxis = this.width / 1.5 // png image has extra padded area
-    this.posX = 0
+    this.posX = (this.gameWidth / 2) - this.width * 0.4
     this.poxY = this.gameHeight - (this.height * 1.3)
     this.speed = 0.05 * gameWidth / 2
     this.maxSpeed = 10
@@ -39,18 +39,16 @@ export default class Player {
 
   public draw (canvasContext: CanvasRenderingContext2D, deltaTime: number) {
     canvasContext.drawImage(this.image, this.posX, this.poxY, this.width, this.height)
-    // console.log(this.width, this.height)
     canvasContext.restore()
-    // console.log(this.posX)
   }
 
   public update (inputLastKey: string) {
     if (inputLastKey === KeyConstants.pressRight) {
-      if (this.posX > this.gameWidth - this.hitBoxXaxis) return // avoid running off screen
+      // if (this.posX > this.gameWidth - this.hitBoxXaxis) return // avoid running off screen
       this.runRight()
     }
     if (inputLastKey === KeyConstants.pressLeft) {
-      if (this.posX <= 0) return // avoid running off screen
+      // if (this.posX <= 0) return // avoid running off screen
       this.runLeft()
     }
     if (inputLastKey === KeyConstants.releaseLeft) {
@@ -93,6 +91,10 @@ export default class Player {
       this.image = document.getElementById(`dinoRunLeft-${this.spriteIndex}`)
       this.spriteIndex++
     }
+  }
+
+  private jump () {
+
   }
 
   private idleStandLeft () {

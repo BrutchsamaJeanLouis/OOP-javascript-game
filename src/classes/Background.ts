@@ -29,13 +29,15 @@ export default class Layer {
   }
 
   draw (context: CanvasRenderingContext2D) {
-    // 2 images stick together
+    // 3 images stick together -  left, center, right
     context.drawImage(this.image, this.posX, this.posY, this.width, this.height)
     context.drawImage(this.image, this.posX + this.width, this.posY, this.width, this.height)
+    context.drawImage(this.image, this.posX - this.width, this.posY, this.width, this.height)
   }
 
   update () {
     if (this.posX < -this.width) {
+      console.log('went off screen looping image right side')
       this.posX = 0
     } else {
       // TODO
@@ -46,6 +48,10 @@ export default class Layer {
       }
       if (this.player.getState() === StateConstants.player.RUNNING_LEFT) {
         // pan background to the left
+        if (this.posX > this.width) {
+          console.log('went off screen looping image left side')
+          this.posX = -this.width
+        }
         this.posX += this.speed
       }
     }

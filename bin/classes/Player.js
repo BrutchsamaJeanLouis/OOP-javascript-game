@@ -11,7 +11,7 @@ var Player = (function () {
         this.width = 0.6 * Math.floor(gameWidth / 2);
         this.height = 0.8 * Math.floor(gameHeight / 2);
         this.hitBoxXaxis = this.width / 1.5;
-        this.posX = 0;
+        this.posX = (this.gameWidth / 2) - this.width * 0.4;
         this.poxY = this.gameHeight - (this.height * 1.3);
         this.speed = 0.05 * gameWidth / 2;
         this.maxSpeed = 10;
@@ -25,13 +25,9 @@ var Player = (function () {
     };
     Player.prototype.update = function (inputLastKey) {
         if (inputLastKey === KeyConstants.pressRight) {
-            if (this.posX > this.gameWidth - this.hitBoxXaxis)
-                return;
             this.runRight();
         }
         if (inputLastKey === KeyConstants.pressLeft) {
-            if (this.posX <= 0)
-                return;
             this.runLeft();
         }
         if (inputLastKey === KeyConstants.releaseLeft) {
@@ -60,6 +56,8 @@ var Player = (function () {
             this.image = document.getElementById("dinoRunLeft-".concat(this.spriteIndex));
             this.spriteIndex++;
         }
+    };
+    Player.prototype.jump = function () {
     };
     Player.prototype.idleStandLeft = function () {
         this.currentState = this.currentState = StateConstants.player.STANDING_LEFT;

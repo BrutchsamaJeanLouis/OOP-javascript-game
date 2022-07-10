@@ -15,9 +15,11 @@ var Layer = (function () {
     Layer.prototype.draw = function (context) {
         context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
         context.drawImage(this.image, this.posX + this.width, this.posY, this.width, this.height);
+        context.drawImage(this.image, this.posX - this.width, this.posY, this.width, this.height);
     };
     Layer.prototype.update = function () {
         if (this.posX < -this.width) {
+            console.log('went off screen looping image right side');
             this.posX = 0;
         }
         else {
@@ -25,6 +27,10 @@ var Layer = (function () {
                 this.posX -= this.speed;
             }
             if (this.player.getState() === StateConstants.player.RUNNING_LEFT) {
+                if (this.posX > this.width) {
+                    console.log('went off screen looping image left side');
+                    this.posX = -this.width;
+                }
                 this.posX += this.speed;
             }
         }
