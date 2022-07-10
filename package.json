@@ -18,7 +18,8 @@
   ],
   "scripts": {
     "start": "run-s watch",
-    "build": "run-s build:*",
+    "build": "npm run build:assets && npm run build:tsc",
+    "build:all": "run-s build:*",
     "serve": "browser-sync start -s \"bin\" -f \"bin\"",
     "build:assets": "copyfiles -u 1 \"src/**/*.js\" \"src/**/*.css\" \"src/**/*.html\" \"src/**/*.{png,jpg,gif}\" bin",
     "build:scss": "node-sass --output-style compressed -r src -o bin",

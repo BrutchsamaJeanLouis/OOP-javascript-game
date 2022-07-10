@@ -8,6 +8,7 @@ Node v14
 ## Usage
 install all dependencies by running: npm install
 ```
+run: npm build
 then run: npm start
 ```
 
