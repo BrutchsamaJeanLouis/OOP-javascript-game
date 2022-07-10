@@ -28,7 +28,7 @@ export default class Player {
     this.height = 0.8 * Math.floor(gameHeight / 2) // 150
     this.hitBoxXaxis = this.width / 1.5 // png image has extra padded area
     this.posX = 0
-    this.poxY = this.gameHeight - this.height
+    this.poxY = this.gameHeight - (this.height * 1.3)
     this.speed = 0.05 * gameWidth / 2
     this.maxSpeed = 10
   }
@@ -65,7 +65,7 @@ export default class Player {
     // change state
     this.currentState = StateConstants.player.RUNNING_RIGHT
     // move
-    this.posX += this.speed
+    // this.posX += this.speed
 
     // animate
     // also checks if this is the last animation to the reset number
@@ -82,7 +82,8 @@ export default class Player {
     this.currentState = StateConstants.player.RUNNING_LEFT
 
     // move
-    this.posX -= this.speed
+    // no need to really move the character since the background class will move instead
+    // this.posX -= this.speed
 
     // animate
     // also checks if this is the last animation to the reset number

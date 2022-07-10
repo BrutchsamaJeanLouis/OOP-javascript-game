@@ -12,7 +12,7 @@ var Player = (function () {
         this.height = 0.8 * Math.floor(gameHeight / 2);
         this.hitBoxXaxis = this.width / 1.5;
         this.posX = 0;
-        this.poxY = this.gameHeight - this.height;
+        this.poxY = this.gameHeight - (this.height * 1.3);
         this.speed = 0.05 * gameWidth / 2;
         this.maxSpeed = 10;
     }
@@ -43,7 +43,6 @@ var Player = (function () {
     };
     Player.prototype.runRight = function () {
         this.currentState = StateConstants.player.RUNNING_RIGHT;
-        this.posX += this.speed;
         if (this.spriteIndex === 8) {
             this.spriteIndex = 1;
         }
@@ -54,7 +53,6 @@ var Player = (function () {
     };
     Player.prototype.runLeft = function () {
         this.currentState = StateConstants.player.RUNNING_LEFT;
-        this.posX -= this.speed;
         if (this.spriteIndex === 8) {
             this.spriteIndex = 1;
         }
